@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
 
     Vector2 moveInput;
     Rigidbody2D playerRB;
-    CapsuleCollider2D playerCollider;
+    BoxCollider2D playerFeetCollider;
     Animator playerAnimator;
     LayerMask groundLayer;
     
@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     {
         playerRB = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
-        playerCollider = GetComponent<CapsuleCollider2D>();
+        playerFeetCollider = GetComponent<BoxCollider2D>();
         groundLayer = LayerMask.GetMask("Ground");
     }
 
@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnJump(InputValue value)
     {
-        if (value.isPressed && playerCollider.IsTouchingLayers(groundLayer))
+        if (value.isPressed && playerFeetCollider.IsTouchingLayers(groundLayer))
         {
             playerRB.linearVelocityY = jumpPower;
         }

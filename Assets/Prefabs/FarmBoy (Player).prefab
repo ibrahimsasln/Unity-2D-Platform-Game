@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5514561708668895973}
   - component: {fileID: 6286493113098552654}
   - component: {fileID: 4633713873528305149}
+  - component: {fileID: 7578550903587154122}
   m_Layer: 0
   m_Name: FarmBoy (Player)
   m_TagString: Untagged
@@ -179,8 +180,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.006603956, y: -0.07088566}
-  m_Size: {x: 0.62350607, y: 0.96933985}
+  m_Offset: {x: -0.00008773804, y: -0.07088566}
+  m_Size: {x: 0.64224243, y: 0.96933985}
   m_Direction: 0
 --- !u!114 &6286493113098552654
 MonoBehaviour:
@@ -226,3 +227,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   moveSpeed: 8
   jumpPower: 13
+--- !u!61 &7578550903587154122
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3069054026766074980}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.005701065, y: -0.5331147}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1.1111112}
+    newSize: {x: 1, y: 1.1111112}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.39658737, y: 0.065059125}
+  m_EdgeRadius: 0
