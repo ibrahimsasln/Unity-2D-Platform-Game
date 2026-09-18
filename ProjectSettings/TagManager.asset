@@ -44,6 +44,21 @@ TagManager:
   - name: Background
     uniqueID: 3000220159
     locked: 0
+  - name: 1Sky
+    uniqueID: 2146544801
+    locked: 0
+  - name: 2Mountain
+    uniqueID: 2000920765
+    locked: 0
+  - name: 3BackTrees
+    uniqueID: 409786121
+    locked: 0
+  - name: 4MidTrees
+    uniqueID: 4094460045
+    locked: 0
+  - name: 5FrontTrees
+    uniqueID: 510039467
+    locked: 0
   - name: Water
     uniqueID: 2732574137
     locked: 0
