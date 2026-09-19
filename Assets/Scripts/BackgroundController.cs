@@ -2,17 +2,18 @@ using UnityEngine;
 
 public class BackgroundController : MonoBehaviour
 {
-    private float startXPos;
-    private float bgLength;
     [SerializeField] GameObject cam;
     [SerializeField] float parallaxSpeed;
+    private float startXPos;
+    private float bgLength;
+    
     private void Awake()
     {
         startXPos = transform.position.x;
         bgLength = GetComponent<SpriteRenderer>().bounds.size.x;
     }
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
         float distance = cam.transform.position.x * parallaxSpeed;
         float movement = cam.transform.position.x * (1 - parallaxSpeed);
