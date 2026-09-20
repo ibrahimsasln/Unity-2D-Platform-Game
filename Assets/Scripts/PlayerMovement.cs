@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 8.0f;
     [SerializeField] float jumpPower = 13.0f;
+    [SerializeField] float deathBounce = 10f;
 
     Vector2 moveInput;
     Rigidbody2D playerRB;
@@ -14,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     LayerMask groundLayer;
     LayerMask enemiesLayer;
 
-    bool isAlive = true;
+    public bool IsPlayerAlive { get; private set; } = true;
 
     private void Awake()
     {
@@ -29,23 +30,23 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!isAlive) return;
+        if (!IsPlayerAlive) return;
 
         Run();
         FlipSprite();
-        Die();
+        CheckDeath();
     }
 
     private void OnMove(InputValue value)
     {
-        if (!isAlive) return;
+        if (!IsPlayerAlive) return;
 
         moveInput = value.Get<Vector2>();
     }
 
     private void OnJump(InputValue value)
     {
-        if (!isAlive) return;
+        if (!IsPlayerAlive) return;
 
         if (value.isPressed && playerFeetCollider.IsTouchingLayers(groundLayer))
         {
@@ -71,11 +72,13 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void Die()
+    private void CheckDeath()
     {
-        if (playerBodyCollider.IsTouchingLayers(enemiesLayer))
+        if (playerBodyCollider.IsTouchingLayers(enemiesLayer) || playerFeetCollider.IsTouchingLayers(enemiesLayer))
         {
-            isAlive = false;
+            IsPlayerAlive = false;
+            playerAnimator.SetTrigger("Dying");
+            playerRB.linearVelocityY = deathBounce;
         }
     }
 }

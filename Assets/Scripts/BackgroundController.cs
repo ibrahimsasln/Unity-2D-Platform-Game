@@ -6,7 +6,7 @@ public class BackgroundController : MonoBehaviour
     [SerializeField] float parallaxSpeed;
     private float startXPos;
     private float bgLength;
-    
+
     private void Awake()
     {
         startXPos = transform.position.x;
