@@ -11986,10 +11986,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4426960088683041372, guid: e0c885a9b642e8848b4d23d196747bc6, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5571904930814009249, guid: e0c885a9b642e8848b4d23d196747bc6, type: 3}
       propertyPath: m_Name
       value: Slime (Yellow)
