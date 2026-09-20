@@ -4,15 +4,15 @@ public class ZombieMovement : MonoBehaviour
 {
     [SerializeField] float speed = 2.0f;
     Rigidbody2D zombieRB;
-    GameObject player;
+    Transform playerTransform;
     PlayerMovement playerMovement;
 
     private void Awake()
     {
         zombieRB = GetComponent<Rigidbody2D>();
-
-        player = GameObject.FindWithTag("Player");
-        playerMovement = player.GetComponent<PlayerMovement>();
+        
+        playerMovement = FindFirstObjectByType<PlayerMovement>();
+        playerTransform = playerMovement.transform;
     }
 
     private void FixedUpdate()
@@ -22,7 +22,7 @@ public class ZombieMovement : MonoBehaviour
             zombieRB.linearVelocity = Vector2.zero;
             return;
         }
-        zombieRB.linearVelocity = new Vector2(player.transform.position.x - transform.position.x, 0f).normalized * speed;
+        zombieRB.linearVelocity = new Vector2(playerTransform.position.x - transform.position.x, 0f).normalized * speed;
         transform.localScale = new Vector2(Mathf.Sign(zombieRB.linearVelocityX), 1.0f);
     }
 }

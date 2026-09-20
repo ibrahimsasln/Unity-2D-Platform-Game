@@ -13,7 +13,7 @@ public class SlimeMovement : MonoBehaviour
     {
         slimeRB.linearVelocity = new Vector2(speed, 0f);
     }
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D other)
     {
         speed = -speed;
         transform.localScale = new Vector2(-(Mathf.Sign(slimeRB.linearVelocityX)), 1.0f);
