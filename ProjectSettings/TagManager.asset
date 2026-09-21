@@ -17,7 +17,7 @@ TagManager:
   - Player
   - Background
   - Bullets
-  - 
+  - Interactables
   - 
   - 
   - 
@@ -68,6 +68,9 @@ TagManager:
     locked: 0
   - name: Enemy
     uniqueID: 981049701
+    locked: 0
+  - name: Interactables
+    uniqueID: 2952943437
     locked: 0
   - name: Player
     uniqueID: 1327738709

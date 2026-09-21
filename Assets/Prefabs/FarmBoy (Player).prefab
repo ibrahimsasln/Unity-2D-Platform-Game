@@ -116,7 +116,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1327738709
-  m_SortingLayer: 10
+  m_SortingLayer: 11
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 978012912, guid: 99a24620d31e5ce4e823c32d11e17c2c, type: 3}
@@ -260,7 +260,7 @@ MonoBehaviour:
   moveSpeed: 8
   jumpPower: 13
   deathBounce: 10
-  bullet: {fileID: 7427853767048806077, guid: ca6a224d99c853d40b3453322c95d74e, type: 3}
+  bulletPrefab: {fileID: 7427853767048806077, guid: ca6a224d99c853d40b3453322c95d74e, type: 3}
   gun: {fileID: 5038176593075621654}
 --- !u!61 &7578550903587154122
 BoxCollider2D:

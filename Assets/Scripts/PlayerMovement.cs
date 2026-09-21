@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float moveSpeed = 8.0f;
     [SerializeField] float jumpPower = 13.0f;
     [SerializeField] float deathBounce = 10f;
-    [SerializeField] GameObject bullet;
+    [SerializeField] GameObject bulletPrefab;
     [SerializeField] Transform gun;
 
     Vector2 moveInput;
@@ -76,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
     private void OnAttack(InputValue value)
     {  
         if(!IsPlayerAlive) return;
-        Instantiate(bullet, gun.position, transform.rotation);
+        Instantiate(bulletPrefab, gun.position, transform.rotation);
     }
 
     private void CheckDeath()
