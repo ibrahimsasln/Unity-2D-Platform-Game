@@ -75,5 +75,8 @@ TagManager:
   - name: Player
     uniqueID: 1327738709
     locked: 0
+  - name: Gun
+    uniqueID: 1556273841
+    locked: 0
   m_RenderingLayers:
   - Default
