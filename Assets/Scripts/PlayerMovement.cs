@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     LayerMask enemiesLayer;
 
     public bool IsPlayerAlive { get; private set; } = true;
+    public int CoinCount { get; private set; }
 
     private void Awake()
     {
@@ -74,8 +75,8 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     private void OnAttack(InputValue value)
-    {  
-        if(!IsPlayerAlive) return;
+    {
+        if (!IsPlayerAlive) return;
         Instantiate(bulletPrefab, gun.position, transform.rotation);
     }
 
@@ -87,5 +88,11 @@ public class PlayerMovement : MonoBehaviour
             playerAnimator.SetTrigger("Dying");
             playerRB.linearVelocityY = deathBounce;
         }
+    }
+
+    public void AddCoin()
+    {
+        CoinCount++;
+        Debug.Log("Coins: " + CoinCount);
     }
 }

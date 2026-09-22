@@ -11,6 +11,10 @@ public class Coin : MonoBehaviour
         if (other.gameObject.CompareTag("Player") && !wasCollected)
         {
             wasCollected = true;
+
+            PlayerMovement wallet = other.gameObject.GetComponent<PlayerMovement>();
+            wallet.AddCoin();
+
             AudioSource.PlayClipAtPoint(coinPickupSFX, transform.position);
             Destroy(gameObject);
         }
