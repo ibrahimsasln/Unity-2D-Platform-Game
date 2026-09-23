@@ -1,23 +1,24 @@
 using UnityEngine;
 
-public class ZombieMovement : MonoBehaviour
+public class Zombie : MonoBehaviour
 {
     [SerializeField] float speed = 2.0f;
+
     Rigidbody2D zombieRB;
     Transform playerTransform;
-    PlayerMovement playerMovement;
+    Player player;
 
     private void Awake()
     {
         zombieRB = GetComponent<Rigidbody2D>();
-        
-        playerMovement = FindFirstObjectByType<PlayerMovement>();
-        playerTransform = playerMovement.transform;
+
+        player = FindFirstObjectByType<Player>();
+        playerTransform = player.transform;
     }
 
     private void FixedUpdate()
     {
-        if (!playerMovement.IsPlayerAlive)
+        if (!player.IsPlayerAlive)
         {
             zombieRB.linearVelocity = Vector2.zero;
             return;

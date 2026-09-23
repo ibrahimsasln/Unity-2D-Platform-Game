@@ -12,7 +12,7 @@ public class Coin : MonoBehaviour
         {
             wasCollected = true;
 
-            PlayerMovement wallet = other.gameObject.GetComponent<PlayerMovement>();
+            Player wallet = other.gameObject.GetComponent<Player>();
             wallet.AddCoin();
 
             AudioSource.PlayClipAtPoint(coinPickupSFX, transform.position);
