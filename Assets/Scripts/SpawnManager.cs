@@ -13,6 +13,12 @@ public class SpawnManager : MonoBehaviour
     }
     private void SpawnZombie()
     {
+        if (!player.IsPlayerAlive)
+        {
+            CancelInvoke();
+            return;
+        }
+
         float direction = Random.value > 0.5f ? 1f : -1f;
         float positionX = player.transform.position.x + (direction * spawnDistance);
         Instantiate(zombiePrefab, new Vector3(positionX, 0.5f, 0f), Quaternion.identity);

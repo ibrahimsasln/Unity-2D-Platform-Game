@@ -12,6 +12,7 @@ public class Bullet : MonoBehaviour
         player = FindFirstObjectByType<Player>();
         dropper = FindFirstObjectByType<CoinDropper>();
         bulletRB.linearVelocityX = player.transform.localScale.x * bulletSpeed;
+        Destroy(gameObject, 4f);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
