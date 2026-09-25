@@ -2,13 +2,14 @@ using UnityEngine;
 
 public class BackgroundController : MonoBehaviour
 {
-    [SerializeField] GameObject cam;
     [SerializeField] float parallaxSpeed;
+    Transform cam;
     private float startXPos;
     private float bgLength;
 
     private void Awake()
     {
+        cam = Camera.main.transform;
         startXPos = transform.position.x;
         bgLength = GetComponent<SpriteRenderer>().bounds.size.x;
     }
