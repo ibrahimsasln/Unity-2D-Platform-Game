@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     [SerializeField] float deathBounce = 10f;
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] Transform gun;
+    [SerializeField] float fireCooldown = 0.2f;
+    float nextFireTime;
 
     Vector2 moveInput;
     Rigidbody2D playerRB;
@@ -77,6 +79,9 @@ public class Player : MonoBehaviour
     private void OnAttack(InputValue value)
     {
         if (!IsPlayerAlive) return;
+        if (Time.time < nextFireTime) return;
+
+        nextFireTime = Time.time + fireCooldown;
         Instantiate(bulletPrefab, gun.position, transform.rotation);
     }
 
