@@ -4,6 +4,7 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] float bulletSpeed = 5.0f;
     [SerializeField] float bulletLifeTime = 2.0f;
+    bool isDead = false;
     Rigidbody2D bulletRB;
     Player player;
     CoinDropper dropper;
@@ -18,8 +19,9 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy") && !isDead)
         {
+            isDead = true;
             dropper.CoinDrop(other.transform);
             Destroy(other.gameObject);
         }
