@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
@@ -9,6 +10,8 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] Transform gun;
     [SerializeField] float fireCooldown = 0.2f;
+    [SerializeField] TextMeshProUGUI coinText;
+
     float nextFireTime;
 
     Vector2 moveInput;
@@ -98,6 +101,6 @@ public class Player : MonoBehaviour
     public void AddCoin()
     {
         CoinCount++;
-        Debug.Log("Coins: " + CoinCount);
+        coinText.text = CoinCount.ToString();
     }
 }

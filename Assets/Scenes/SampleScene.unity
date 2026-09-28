@@ -9544,7 +9544,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 99
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b763d59e6bd80a541a6452c57b87225f, type: 2}
   m_sharedMaterial: {fileID: 4537079271527142090, guid: b763d59e6bd80a541a6452c57b87225f, type: 2}
@@ -10337,6 +10337,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FarmBoy (Player)
       objectReference: {fileID: 0}
+    - target: {fileID: 4633713873528305149, guid: e20f0cf716aef804191821e22ec680b8, type: 3}
+      propertyPath: coinText
+      value: 
+      objectReference: {fileID: 1529674824}
     - target: {fileID: 6180225799345113476, guid: e20f0cf716aef804191821e22ec680b8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -16.61
