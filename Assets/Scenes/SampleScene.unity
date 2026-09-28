@@ -9499,7 +9499,7 @@ GameObject:
   - component: {fileID: 1529674825}
   - component: {fileID: 1529674824}
   m_Layer: 5
-  m_Name: Lives Text
+  m_Name: Coin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9553,8 +9553,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4284670446
+  m_fontColor: {r: 0.9339623, g: 0.8842229, b: 0.383277, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
