@@ -193,7 +193,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc6a805437f721541ae4342b47f15a8e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
+  m_EditorClassIdentifier: Assembly-CSharp::ZombieMovement
   speed: 2
 --- !u!114 &-4491783838469230870
 MonoBehaviour:

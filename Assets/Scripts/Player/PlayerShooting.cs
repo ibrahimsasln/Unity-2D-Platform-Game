@@ -7,17 +7,17 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] Transform gun;
     [SerializeField] float fireCooldown = 0.2f;
 
-    Player player;
+    PlayerHealth playerHealth;
     float nextFireTime;
 
     private void Awake()
     {
-        player = GetComponent<Player>();
+        playerHealth = GetComponent<PlayerHealth>();
     }
 
     private void OnAttack(InputValue value)
     {
-        if (!player.IsAlive) return;
+        if (!playerHealth.IsAlive) return;
         if (Time.time < nextFireTime) return;
 
         nextFireTime = Time.time + fireCooldown;

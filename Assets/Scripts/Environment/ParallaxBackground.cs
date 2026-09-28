@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BackgroundController : MonoBehaviour
+public class ParallaxBackground : MonoBehaviour
 {
     [SerializeField] float parallaxSpeed;
 

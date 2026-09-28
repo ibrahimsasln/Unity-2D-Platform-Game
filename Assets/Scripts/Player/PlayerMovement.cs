@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Player))]
 public class PlayerMovement : MonoBehaviour
 {
     static readonly int IsRunningHash = Animator.StringToHash("isRunning");
@@ -9,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float moveSpeed = 8f;
     [SerializeField] float jumpPower = 13f;
 
-    Player player;
+    PlayerHealth playerHealth;
     Rigidbody2D playerRB;
     BoxCollider2D feetCollider;
     Animator playerAnimator;
@@ -20,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-        player = GetComponent<Player>();
+        playerHealth = GetComponent<PlayerHealth>();
         playerRB = GetComponent<Rigidbody2D>();
         feetCollider = GetComponent<BoxCollider2D>();
         playerAnimator = GetComponent<Animator>();
@@ -29,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!player.IsAlive) return;
+        if (!playerHealth.IsAlive) return;
 
         playerRB.linearVelocityX = moveInput.x * moveSpeed;
 
@@ -49,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnJump(InputValue value)
     {
-        if (!player.IsAlive) return;
+        if (!playerHealth.IsAlive) return;
 
         if (value.isPressed && IsGrounded)
         {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SpawnManager : MonoBehaviour
+public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] GameObject zombiePrefab;
     [SerializeField] float firstSpawnDelay = 5f;
@@ -9,7 +9,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] float groundSearchHeight = 10f;
     [SerializeField] float spawnHeightOffset = 0.5f;
 
-    Player player;
+    PlayerHealth player;
     LayerMask groundLayer;
 
     private void Awake()
@@ -19,7 +19,7 @@ public class SpawnManager : MonoBehaviour
 
     private void Start()
     {
-        player = FindFirstObjectByType<Player>();
+        player = FindFirstObjectByType<PlayerHealth>();
         player.Died += StopSpawning;
         InvokeRepeating(nameof(SpawnZombie), firstSpawnDelay, spawnRate);
     }

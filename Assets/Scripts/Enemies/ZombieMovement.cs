@@ -1,16 +1,16 @@
 using UnityEngine;
 
-public class Zombie : MonoBehaviour
+public class ZombieMovement : MonoBehaviour
 {
     [SerializeField] float speed = 2f;
 
     Rigidbody2D zombieRB;
-    Player player;
+    PlayerHealth player;
 
     private void Awake()
     {
         zombieRB = GetComponent<Rigidbody2D>();
-        player = FindFirstObjectByType<Player>();
+        player = FindFirstObjectByType<PlayerHealth>();
     }
 
     private void FixedUpdate()
