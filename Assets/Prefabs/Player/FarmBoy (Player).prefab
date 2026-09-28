@@ -109,6 +109,7 @@ GameObject:
   - component: {fileID: 7578550903587154122}
   - component: {fileID: 2319121401488429679}
   - component: {fileID: 4959497058990872130}
+  - component: {fileID: 8477186018785537063}
   m_Layer: 8
   m_Name: FarmBoy (Player)
   m_TagString: Player
@@ -320,7 +321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   deathBounce: 10
-  deathDelay: 2
+  gameOverDelay: 2
 --- !u!61 &7578550903587154122
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -381,6 +382,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   moveSpeed: 8
   jumpPower: 13
+  knockbackForce: {x: 6, y: 5}
+  knockbackDuration: 0.25
 --- !u!114 &4959497058990872130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,3 +399,18 @@ MonoBehaviour:
   bulletPrefab: {fileID: -2004970122281866708, guid: ca6a224d99c853d40b3453322c95d74e, type: 3}
   gun: {fileID: 5038176593075621654}
   fireCooldown: 0.2
+  bulletDamage: 1
+--- !u!114 &8477186018785537063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3069054026766074980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f3d392c7655d5b4d86bf3b13ca03790, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Health
+  maxHealth: 5
+  invulnerabilityDuration: 1

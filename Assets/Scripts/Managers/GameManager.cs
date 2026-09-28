@@ -4,8 +4,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] int playerLives = 3;
-
     public static GameManager Instance { get; private set; }
 
     public int Coins { get; private set; }
@@ -28,26 +26,10 @@ public class GameManager : MonoBehaviour
         CoinsChanged?.Invoke(Coins);
     }
 
-    public void HandlePlayerDeath()
+    public void GameOver()
     {
-        if (playerLives > 1)
-        {
-            LoseLife();
-        }
-        else
-        {
-            GameOver();
-        }
-    }
-
-    private void LoseLife()
-    {
-        playerLives--;
+        // TODO: show Game Over screen with restart / main menu buttons
+        Coins = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    private void GameOver()
-    {
-        // shows Game Over screen and restart button or main menu button
     }
 }

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3899417068384039751}
   - component: {fileID: 3142597213234957126}
   - component: {fileID: -4491783838469230870}
+  - component: {fileID: 3065706760369625484}
   m_Layer: 7
   m_Name: Zombie0
   m_TagString: Enemy
@@ -133,7 +134,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 2f7a5d118bbdcaa43a681e0f678b68b0, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -195,6 +196,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZombieMovement
   speed: 2
+  jumpPower: 4
+  wallCheckDistance: 0.45
+  groundCheckDistance: 0.6
 --- !u!114 &-4491783838469230870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,4 +211,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b748a028af4baf24db7057cb8e793717, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  contactDamage: 1
   coinDropCount: 3
+--- !u!114 &3065706760369625484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5980579796443154516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f3d392c7655d5b4d86bf3b13ca03790, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Health
+  maxHealth: 3
+  invulnerabilityDuration: 0

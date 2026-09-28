@@ -9,27 +9,32 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] float groundSearchHeight = 10f;
     [SerializeField] float spawnHeightOffset = 0.5f;
 
-    PlayerHealth player;
+    Transform playerTransform;
+    Health playerHealth;
     LayerMask groundLayer;
 
     private void Awake()
     {
         groundLayer = LayerMask.GetMask("Ground");
+
+        GameObject player = GameObject.FindWithTag("Player");
+        playerTransform = player.transform;
+        playerHealth = player.GetComponent<Health>();
+    }
+
+    private void OnEnable()
+    {
+        playerHealth.Died += StopSpawning;
+    }
+
+    private void OnDisable()
+    {
+        playerHealth.Died -= StopSpawning;
     }
 
     private void Start()
     {
-        player = FindFirstObjectByType<PlayerHealth>();
-        player.Died += StopSpawning;
         InvokeRepeating(nameof(SpawnZombie), firstSpawnDelay, spawnRate);
-    }
-
-    private void OnDestroy()
-    {
-        if (player != null)
-        {
-            player.Died -= StopSpawning;
-        }
     }
 
     private void StopSpawning()
@@ -40,7 +45,7 @@ public class EnemySpawner : MonoBehaviour
     private void SpawnZombie()
     {
         float side = Random.value > 0.5f ? 1f : -1f;
-        float spawnX = player.transform.position.x + side * spawnDistance;
+        float spawnX = playerTransform.position.x + side * spawnDistance;
 
         if (TryFindGround(spawnX, out Vector2 groundPoint))
         {
@@ -50,7 +55,7 @@ public class EnemySpawner : MonoBehaviour
 
     private bool TryFindGround(float x, out Vector2 groundPoint)
     {
-        Vector2 origin = new Vector2(x, player.transform.position.y + groundSearchHeight);
+        Vector2 origin = new Vector2(x, playerTransform.position.y + groundSearchHeight);
         RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.down, groundSearchHeight * 2f, groundLayer);
 
         groundPoint = hit.point;

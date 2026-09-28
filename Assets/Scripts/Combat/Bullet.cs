@@ -5,10 +5,12 @@ public class Bullet : MonoBehaviour
     [SerializeField] float bulletSpeed = 20f;
     [SerializeField] float bulletLifeTime = 1f;
 
+    int damage;
     bool hasHit;
 
-    public void Launch(float direction)
+    public void Launch(float direction, int damage)
     {
+        this.damage = damage;
         GetComponent<Rigidbody2D>().linearVelocityX = direction * bulletSpeed;
         Destroy(gameObject, bulletLifeTime);
     }
@@ -18,9 +20,9 @@ public class Bullet : MonoBehaviour
         if (hasHit) return;
         hasHit = true;
 
-        if (other.TryGetComponent(out Enemy enemy))
+        if (other.TryGetComponent(out Health health))
         {
-            enemy.Die();
+            health.TakeDamage(damage, transform.position);
         }
         Destroy(gameObject);
     }
