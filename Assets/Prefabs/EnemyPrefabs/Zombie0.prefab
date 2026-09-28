@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4571649775845058342}
   - component: {fileID: 3899417068384039751}
   - component: {fileID: 3142597213234957126}
+  - component: {fileID: -4491783838469230870}
   m_Layer: 7
   m_Name: Zombie0
   m_TagString: Enemy
@@ -194,3 +195,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
   speed: 2
+--- !u!114 &-4491783838469230870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5980579796443154516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b748a028af4baf24db7057cb8e793717, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  coinDropCount: 3

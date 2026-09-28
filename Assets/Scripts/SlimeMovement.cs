@@ -35,8 +35,8 @@ public class SlimeMovement : MonoBehaviour
 
     private bool IsGroundAhead()
     {
-        Vector2 drawStartPos = (Vector2)transform.position + new Vector2(groundCheckOffset * Direction, 0f);
-        return CastRay(drawStartPos, Vector2.down, groundCheckDistance);
+        Vector2 origin = (Vector2)transform.position + new Vector2(groundCheckOffset * Direction, 0f);
+        return CastRay(origin, Vector2.down, groundCheckDistance);
     }
 
     private bool CastRay(Vector2 origin, Vector2 direction, float distance)

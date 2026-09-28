@@ -1,106 +1,49 @@
+using System;
+using System.Collections;
 using UnityEngine;
-using TMPro;
-using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] float moveSpeed = 8.0f;
-    [SerializeField] float jumpPower = 13.0f;
+    static readonly int DyingHash = Animator.StringToHash("Dying");
+
     [SerializeField] float deathBounce = 10f;
-    [SerializeField] GameObject bulletPrefab;
-    [SerializeField] Transform gun;
-    [SerializeField] float fireCooldown = 0.2f;
-    [SerializeField] TextMeshProUGUI coinText;
+    [SerializeField] float deathDelay = 2f;
 
-    float nextFireTime;
-
-    Vector2 moveInput;
     Rigidbody2D playerRB;
-    BoxCollider2D playerFeetCollider;
-    CapsuleCollider2D playerBodyCollider;
     Animator playerAnimator;
-    LayerMask groundLayer;
     LayerMask enemiesLayer;
 
-    public bool IsPlayerAlive { get; private set; } = true;
-    public int CoinCount { get; private set; }
+    public bool IsAlive { get; private set; } = true;
+    public event Action Died;
 
     private void Awake()
     {
         playerRB = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
-        playerFeetCollider = GetComponent<BoxCollider2D>();
-        playerBodyCollider = GetComponent<CapsuleCollider2D>();
-        groundLayer = LayerMask.GetMask("Ground");
         enemiesLayer = LayerMask.GetMask("Enemies");
-
     }
 
     private void FixedUpdate()
     {
-        if (!IsPlayerAlive) return;
-
-        Run();
-        FlipSprite();
-        CheckDeath();
-    }
-
-    private void OnMove(InputValue value)
-    {
-        if (!IsPlayerAlive) return;
-
-        moveInput = value.Get<Vector2>();
-    }
-
-    private void OnJump(InputValue value)
-    {
-        if (!IsPlayerAlive) return;
-
-        if (value.isPressed && playerFeetCollider.IsTouchingLayers(groundLayer))
+        if (IsAlive && playerRB.IsTouchingLayers(enemiesLayer))
         {
-            playerRB.linearVelocityY = jumpPower;
+            Die();
         }
     }
 
-    private void Run()
+    private void Die()
     {
-        playerRB.linearVelocity = new Vector2(moveInput.x * moveSpeed, playerRB.linearVelocityY);
+        IsAlive = false;
+        playerAnimator.SetTrigger(DyingHash);
+        playerRB.linearVelocityY = deathBounce;
 
-        bool hasSpeed = Mathf.Abs(playerRB.linearVelocityX) > Mathf.Epsilon;
-        playerAnimator.SetBool("isRunning", hasSpeed);
-
+        Died?.Invoke();
+        StartCoroutine(ReportDeathAfterDelay());
     }
 
-    private void FlipSprite()
+    private IEnumerator ReportDeathAfterDelay()
     {
-        bool hasSpeed = Mathf.Abs(playerRB.linearVelocityX) > Mathf.Epsilon;
-        if (hasSpeed)
-        {
-            transform.localScale = new Vector2(Mathf.Sign(playerRB.linearVelocityX), 1f);
-        }
-    }
-    private void OnAttack(InputValue value)
-    {
-        if (!IsPlayerAlive) return;
-        if (Time.time < nextFireTime) return;
-
-        nextFireTime = Time.time + fireCooldown;
-        Instantiate(bulletPrefab, gun.position, transform.rotation);
-    }
-
-    private void CheckDeath()
-    {
-        if (playerBodyCollider.IsTouchingLayers(enemiesLayer) || playerFeetCollider.IsTouchingLayers(enemiesLayer))
-        {
-            IsPlayerAlive = false;
-            playerAnimator.SetTrigger("Dying");
-            playerRB.linearVelocityY = deathBounce;
-        }
-    }
-
-    public void AddCoin()
-    {
-        CoinCount++;
-        coinText.text = CoinCount.ToString();
+        yield return new WaitForSeconds(deathDelay);
+        GameManager.Instance.HandlePlayerDeath();
     }
 }

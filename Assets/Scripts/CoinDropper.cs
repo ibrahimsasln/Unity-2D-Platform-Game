@@ -3,17 +3,18 @@ using UnityEngine;
 public class CoinDropper : MonoBehaviour
 {
     [SerializeField] GameObject coinPrefab;
-    [SerializeField] int coinCount;
+    [SerializeField] float minDropForce = 3f;
+    [SerializeField] float maxDropForce = 6f;
 
-    public void CoinDrop(Transform enemyTransform)
+    public void DropCoins(Vector2 position, int count)
     {
-        for (int i = 0; i < coinCount; i++)
+        for (int i = 0; i < count; i++)
         {
-            GameObject coin = Instantiate(coinPrefab, enemyTransform.position, Quaternion.identity);
-            Rigidbody2D coinRB = coin.GetComponent<Rigidbody2D>();
+            GameObject coin = Instantiate(coinPrefab, position, Quaternion.identity);
 
-            Vector2 dropDirection = new Vector2(Random.Range(-1f, 1f), Random.Range(0.5f, 1f)).normalized;
-            coinRB.AddForce(dropDirection * Random.Range(3f, 6f), ForceMode2D.Impulse);
+            Vector2 direction = new Vector2(Random.Range(-1f, 1f), Random.Range(0.5f, 1f)).normalized;
+            float force = Random.Range(minDropForce, maxDropForce);
+            coin.GetComponent<Rigidbody2D>().AddForce(direction * force, ForceMode2D.Impulse);
         }
     }
 }
