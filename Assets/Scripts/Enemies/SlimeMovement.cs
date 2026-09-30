@@ -2,53 +2,88 @@ using UnityEngine;
 
 public class SlimeMovement : MonoBehaviour
 {
-    [SerializeField] float speed = 1.0f;
-    [SerializeField] float wallCheckDistance = 0.5f;
-    [SerializeField] float groundCheckDistance = 0.7f;
-    [SerializeField] float groundCheckOffset = 0.5f;
+    enum State { Waiting, Jumping }
+
+    [SerializeField] float waitTime = 1.5f;
+    [SerializeField] Vector2 jumpForce = new Vector2(3f, 6f);
+    [SerializeField] float groundCheckDistance = 0.6f;
 
     Rigidbody2D slimeRB;
+    Transform playerTransform;
+    Health playerHealth;
     LayerMask groundLayer;
 
-    float Direction => Mathf.Sign(speed);
+    State state = State.Waiting;
+    float nextJumpTime;
 
     private void Awake()
     {
         slimeRB = GetComponent<Rigidbody2D>();
         groundLayer = LayerMask.GetMask("Ground");
+
+        GameObject player = GameObject.FindWithTag("Player");
+        playerTransform = player.transform;
+        playerHealth = player.GetComponent<Health>();
+
+        nextJumpTime = Time.time + waitTime;
     }
 
     private void FixedUpdate()
     {
-        slimeRB.linearVelocity = new Vector2(speed, 0f);
+        if (playerHealth.IsDead) return;
 
-        if (!IsGroundAhead() || IsWallAhead())
+        switch (state)
         {
-            Flip();
+            case State.Waiting:
+                UpdateWaiting();
+                break;
+            case State.Jumping:
+                UpdateJumping();
+                break;
         }
     }
 
-    private bool IsWallAhead()
+    private void UpdateWaiting()
     {
-        return CastRay(transform.position, Vector2.right * Direction, wallCheckDistance);
+        slimeRB.linearVelocityX = 0f;
+
+        if (Time.time >= nextJumpTime)
+        {
+            JumpTowardsPlayer();
+        }
     }
 
-    private bool IsGroundAhead()
+    private void UpdateJumping()
     {
-        Vector2 origin = (Vector2)transform.position + new Vector2(groundCheckOffset * Direction, 0f);
-        return CastRay(origin, Vector2.down, groundCheckDistance);
+        bool isFalling = slimeRB.linearVelocityY <= 0f;
+
+        if (isFalling && IsGrounded())
+        {
+            Land();
+        }
     }
 
-    private bool CastRay(Vector2 origin, Vector2 direction, float distance)
+    private void JumpTowardsPlayer()
     {
-        bool hit = Physics2D.Raycast(origin, direction, distance, groundLayer);
-        Debug.DrawRay(origin, direction * distance, hit ? Color.green : Color.red);
+        float direction = Mathf.Sign(playerTransform.position.x - transform.position.x);
+        transform.localScale = new Vector2(direction, 1f);
+        slimeRB.linearVelocity = new Vector2(direction * jumpForce.x, jumpForce.y);
+
+        state = State.Jumping;
+    }
+
+    private void Land()
+    {
+        slimeRB.linearVelocityX = 0f;
+        nextJumpTime = Time.time + waitTime;
+
+        state = State.Waiting;
+    }
+
+    private bool IsGrounded()
+    {
+        bool hit = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, groundLayer);
+        Debug.DrawRay(transform.position, Vector2.down * groundCheckDistance, hit ? Color.green : Color.red);
         return hit;
-    }
-
-    private void Flip()
-    {
-        speed = -speed;
-        transform.localScale = new Vector2(Direction, 1f);
     }
 }
